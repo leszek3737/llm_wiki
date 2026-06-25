@@ -303,11 +303,17 @@ export function WebSearchSection() {
               min={1}
               max={8}
               step={1}
-              value={resolvedConfig.deepResearchConcurrency ?? 3}
+              value={resolvedConfig.deepResearchConcurrency ?? ""}
+              placeholder="3"
               onChange={(e) => {
-                const n = Math.floor(Number(e.target.value))
+                const val = e.target.value.trim()
+                if (!val) {
+                  updateDeepResearch({ deepResearchConcurrency: undefined })
+                  return
+                }
+                const n = Math.floor(Number(val))
                 updateDeepResearch({
-                  deepResearchConcurrency: Number.isFinite(n) ? Math.min(8, Math.max(1, n)) : 1,
+                  deepResearchConcurrency: Number.isFinite(n) ? Math.min(8, Math.max(1, n)) : undefined,
                 })
               }}
             />
@@ -322,11 +328,17 @@ export function WebSearchSection() {
               min={1}
               max={100}
               step={1}
-              value={resolvedConfig.deepResearchMaxSources ?? 20}
+              value={resolvedConfig.deepResearchMaxSources ?? ""}
+              placeholder="20"
               onChange={(e) => {
-                const n = Math.floor(Number(e.target.value))
+                const val = e.target.value.trim()
+                if (!val) {
+                  updateDeepResearch({ deepResearchMaxSources: undefined })
+                  return
+                }
+                const n = Math.floor(Number(val))
                 updateDeepResearch({
-                  deepResearchMaxSources: Number.isFinite(n) ? Math.min(100, Math.max(1, n)) : 1,
+                  deepResearchMaxSources: Number.isFinite(n) ? Math.min(100, Math.max(1, n)) : undefined,
                 })
               }}
             />
